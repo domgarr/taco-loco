@@ -15,7 +15,7 @@ public class MenuItemTests extends TacoLocoApplicationTests {
 	
 	@BeforeEach
 	void init() {
-		veggieTaco = new MenuItem("Veggie Taco", 2.50);
+		veggieTaco = new MenuItem(1, "Veggie Taco", 2.50);
 	}
 	
 	//Test constructor.
@@ -25,6 +25,26 @@ public class MenuItemTests extends TacoLocoApplicationTests {
 		assertEquals("Veggie Taco", veggieTaco.getName());
 		assertEquals(2.50, veggieTaco.getCost());
 	}
+	
+	//Test getId().
+	
+	@Test
+	@DisplayName("getId() should return 1")
+	void menuItemGetIdTest() {
+		assertEquals(1, veggieTaco.getId());
+	}
+	
+	//Test setId().
+	@Test
+	@DisplayName("setId() should set id to equal 2.")
+	void menuItemSetIdTest() {
+		assertEquals(1, veggieTaco.getId());
+		veggieTaco.setId(2);
+		assertEquals(2, veggieTaco.getId());
+		
+	}
+	
+	
 
 	//test setCost()
 	@Test

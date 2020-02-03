@@ -3,11 +3,11 @@ package com.domgarr.tacoloco.service;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.domgarr.tacoloco.model.OrderItem;
 
-@Component
+@Service
 public class OrderService {
 	
 	private int discountThreshold = 4;

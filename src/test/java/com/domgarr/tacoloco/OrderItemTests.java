@@ -3,6 +3,7 @@ package com.domgarr.tacoloco;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static com.domgarr.tacoloco.service.MenuService.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,13 +13,14 @@ import com.domgarr.tacoloco.model.MenuItem;
 import com.domgarr.tacoloco.model.OrderItem;
 
 
+
 public class OrderItemTests extends TacoLocoApplicationTests {
 	
 	private OrderItem veggieTacoOrder;
 	
 	@BeforeEach
 	void init() {
-		MenuItem veggieTaco = new MenuItem(VEGGIE_TACO, 2.50);
+		MenuItem veggieTaco = new MenuItem(1, VEGGIE_TACO, 2.50);
 		veggieTacoOrder = new OrderItem(veggieTaco, 1);
 	}
 	
@@ -76,7 +78,7 @@ public class OrderItemTests extends TacoLocoApplicationTests {
 	@Test
 	@DisplayName("Setting a menuItem should mutate the menuItem object stored in OrderItem")
 	void setMenuItemMutateMenuItemTest() {
-		MenuItem chickenTaco = new MenuItem(CHICKEN_TACO, 3);
+		MenuItem chickenTaco = new MenuItem(1, CHICKEN_TACO, 3);
 		assertNotNull(chickenTaco);
 		
 		veggieTacoOrder.setMenuItem(chickenTaco);

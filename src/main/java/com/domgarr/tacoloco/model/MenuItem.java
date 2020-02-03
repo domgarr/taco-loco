@@ -10,12 +10,22 @@ package com.domgarr.tacoloco.model;
  */
 
 public class MenuItem {
+	int id;
 	private String name;
 	private double cost;
 	
-	public MenuItem(String name, double cost) {
+	public MenuItem(int id, String name, double cost) {
+		setId(id);
 		setName(name);
 		setCost(cost);
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

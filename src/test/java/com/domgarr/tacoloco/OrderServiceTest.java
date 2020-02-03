@@ -4,33 +4,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.domgarr.tacoloco.model.MenuItem;
 import com.domgarr.tacoloco.model.OrderItem;
+import com.domgarr.tacoloco.service.MenuService;
 import com.domgarr.tacoloco.service.OrderService;
+
+import static com.domgarr.tacoloco.service.MenuService.*;
 
 public class OrderServiceTest extends TacoLocoApplicationTests {
 	@Autowired
-	private static OrderService orderService;
+	private OrderService orderService;
+	@Autowired
+	private MenuService menuService;
+	
 	private ArrayList<OrderItem> orderItems;
-	
-	private OrderItem veggieTacoOrder = new OrderItem(menuItems.get(VEGGIE_TACO), 1);
-	private OrderItem chickenTacoOrder = new OrderItem(menuItems.get(CHICKEN_TACO), 1);
-	private OrderItem beefTacoOrder = new OrderItem(menuItems.get(BEEF_TACO), 1);
-	private OrderItem chorizoTacoOrder = new OrderItem(menuItems.get(CHORIZO_TACO), 1);
-	
-	@BeforeAll
-	static void initAll() {
-		orderService = new OrderService();
-	}
+		
+	private OrderItem veggieTacoOrder;
+	private OrderItem chickenTacoOrder;
+	private OrderItem beefTacoOrder;
+	private OrderItem chorizoTacoOrder;
 	
 	@BeforeEach
 	void init() {
+		HashMap<String, MenuItem> menuItems = menuService.getMenuMapWithStringAsKey();
+		
+		veggieTacoOrder = new OrderItem(menuItems.get(VEGGIE_TACO), 1);
+		chickenTacoOrder = new OrderItem(menuItems.get(CHICKEN_TACO), 1);
+		beefTacoOrder = new OrderItem(menuItems.get(BEEF_TACO), 1);
+		chorizoTacoOrder = new OrderItem(menuItems.get(CHORIZO_TACO), 1);
 		
 		orderItems = new ArrayList<>();
 	}
@@ -138,8 +146,5 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 	void roundDoubleToTwoDecimalPoints9DecPointTest() {
 		assertEquals(2.22, orderService.roundDoubleToTwoDecimalPoints(2.223333456));
 	}
-	
-	
-	
-	
+
 }
