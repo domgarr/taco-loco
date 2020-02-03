@@ -12,6 +12,10 @@ public class OrderItem {
 	private MenuItem menuItem;
 	private int quantity;
 	
+	public OrderItem() {
+		
+	}
+	
 	public OrderItem(MenuItem menuItem, int quantity) {
 		setMenuItem(menuItem);
 		setQuantity(quantity);

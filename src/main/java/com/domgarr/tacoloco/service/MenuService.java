@@ -5,6 +5,15 @@ import java.util.HashMap;
 import org.springframework.stereotype.Service;
 
 import com.domgarr.tacoloco.model.MenuItem;
+/**
+ *	MenuService will act as a service and DAO since a database wasn't required.
+ *
+ * There are two HashMap implementations containing all the MenuItems on TacoLoco's menu.
+ * 	-The HashMap (HM) with the String key is used in testing.
+ * 	-The HM with the Integer key is used for mapping id's to their respective MenuItem.
+ * @author Domenic
+ *
+ */
 
 @Service
 public class MenuService {
@@ -23,7 +32,6 @@ public class MenuService {
 		chickenTaco = new MenuItem(2, CHICKEN_TACO, 3);
 		beefTaco = new MenuItem(3, BEEF_TACO, 3);
 		chorizoTaco = new MenuItem(4, CHORIZO_TACO, 3.50);
-		System.out.println("INIT");
 	}
 	
 	public HashMap<String, MenuItem> getMenuMapWithStringAsKey(){
