@@ -20,13 +20,22 @@ public class OrderService {
 	private double discountPrecentage = 0.20;
 	
 	/**
+	 * 
+	 * @param orderItemReqList
+	 * @return totalCost/sum of OrderItems.
+	 */
+	public double getTotalCost(ArrayList<OrderItemRequest> orderItemReqList) {
+		return getTotalOrderCostFromOrderItems(toOrderItemList(orderItemReqList));
+	}
+	
+	/**
 	 * Given an ArrayList comprised OrderItems, calculate the total cost of the entire order
 	 * and apply a discount if applicable. 
 	 * 
 	 * @param orderItemList of OrderItems.
 	 * @return double representing total cost of entire order rounded to two decimal points.
 	 */
-	public double getTotalOrderCost(ArrayList<OrderItem> orderItemList) {
+	public double getTotalOrderCostFromOrderItems(ArrayList<OrderItem> orderItemList) {
 		
 		if(orderItemList == null || orderItemList.isEmpty()) {
 			throw new IllegalArgumentException("The list of item orders can't be null or empty.");

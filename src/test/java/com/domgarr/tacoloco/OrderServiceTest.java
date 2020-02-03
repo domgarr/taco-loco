@@ -50,14 +50,14 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 	@DisplayName("A null OrderItemArrayList should throw an IllegalArgumentException")
 	void getTotalOrderCostNullArrayListTest() {
 		ArrayList<OrderItem> nullOrderList = null;
-		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCost(nullOrderList);});
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCostFromOrderItems(nullOrderList);});
 		assertEquals("The list of item orders can't be null or empty.", exception.getMessage());
 	}
 	
 	@Test
 	@DisplayName("An empty OrderItemArrayList should throw an IllegalArgumentException")
 	void getTotalOrderCostEmptyArrayListTest() {
-		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCost(orderItems);});
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCostFromOrderItems(orderItems);});
 		assertEquals("The list of item orders can't be null or empty.", exception.getMessage());
 	}
 	
@@ -69,7 +69,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 	void getTotalOrderCostOneItemTest() {
 		orderItems.add(veggieTacoOrder);
 		
-		assertEquals(2.50, orderService.getTotalOrderCost(orderItems));
+		assertEquals(2.50, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
 	@Test
@@ -78,7 +78,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		orderItems.add(veggieTacoOrder);
 		orderItems.add(chickenTacoOrder);
 
-		assertEquals(5.50, orderService.getTotalOrderCost(orderItems));
+		assertEquals(5.50, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
 	@Test
@@ -88,7 +88,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		orderItems.add(chickenTacoOrder);
 		orderItems.add(chorizoTacoOrder);
 		
-		assertEquals(9.00, orderService.getTotalOrderCost(orderItems));
+		assertEquals(9.00, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
 	//Test exactly 4 items.
@@ -100,7 +100,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		orderItems.add(chickenTacoOrder);
 		orderItems.add(chorizoTacoOrder);
 		
-		assertEquals(9.60, orderService.getTotalOrderCost(orderItems));
+		assertEquals(9.60, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
 	//Test greater than 8 items.
@@ -119,7 +119,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		chorizoTacoOrder.setQuantity(2);
 		orderItems.add(chorizoTacoOrder);
 		
-		assertEquals(19.20, orderService.getTotalOrderCost(orderItems));
+		assertEquals(19.20, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
 	
