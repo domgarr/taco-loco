@@ -48,11 +48,91 @@
 	</dependencies>
 
 	<build>
+		<defaultGoal>springboot-run</defaultGoal>
+	
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+	            <groupId>com.github.eirslett</groupId>
+	            <artifactId>frontend-maven-plugin</artifactId>
+	            <version>1.9.1</version>
+	
+	            
+	            <configuration>
+	            	<workingDirectory>
+	            		client
+	            	</workingDirectory>
+	            </configuration>
+				
+				<executions>
+                <execution>
+                    <id>install node and npm</id>
+                    <goals>
+                        <goal>install-node-and-npm</goal>
+                    </goals>
+                    <phase>generate-resources</phase>
+                    <configuration>
+                        <nodeVersion>v13.2.0</nodeVersion>
+                        <npmVersion>6.13.1</npmVersion>                      
+                    </configuration>                        
+                </execution>
+                <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <!-- Optional configuration which provides for running any npm command -->
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                 </execution>
+                 <execution>
+                     <id>prod</id>
+                     <goals>
+                       <goal>npm</goal>
+                     </goals>
+                     <configuration>
+                       <arguments>run build-prod</arguments>
+                     
+                     </configuration>
+                     <phase>generate-resources</phase>
+                  </execution>                                                      
+            </executions>
+	        </plugin>
+		      <!--  https://jinahya.wordpress.com/2014/05/22/executable-jar-with-apache-maven/ -->
+		    <plugin>
+				  <groupId>org.apache.maven.plugins</groupId>
+				  <artifactId>maven-dependency-plugin</artifactId>
+				  <executions>
+				    <execution>
+				      <phase>package</phase>
+				      <goals>
+				        <goal>copy-dependencies</goal>
+				      </goals>
+				      <configuration>
+				        <outputDirectory>${project.build.directory}/${project.build.finalName}.lib</outputDirectory>
+				        <includeScope>runtime</includeScope>
+				      </configuration>
+				    </execution>
+				  </executions>
+			 </plugin>
+		     <plugin>
+		      <!-- Build an executable JAR -->
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-jar-plugin</artifactId>
+		      <configuration>
+			      <archive>
+			        <manifest>
+			          <addClasspath>true</addClasspath>
+			          <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
+			          <mainClass>com.domgarr.tacoloco.TacoLocoApplication</mainClass>
+			        </manifest>
+			      </archive>
+		      </configuration>
+		    </plugin>
 		</plugins>
 	</build>
 
