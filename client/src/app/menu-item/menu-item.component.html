@@ -1,14 +1,16 @@
 <div id="menuItem.id" class="media text-muted pt-3 d-flex justify-content-center">
     <div class = "row">
-        <div class="col-9 ">
+        <div class="col-8 ">
         <p class="media-body pb-3 mb-0 small border-botom border-gray">
         <strong class="d-block text-gray-dark">{{menuItem.name}}</strong>  
             ${{menuItem.cost.toFixed(2)}}
         </p>
         </div>
-        <div class="col-3 d-flex align-items-center">
+        <div class="col-4 d-flex align-items-center">
             <div class="input-group flex-nowrap">
-                <input type="text" class="form-control text-center" placeholder="0" aria-label="cost" aria-describedby="addon-wrapping" (input)="onQuantityChange()" [(ngModel)]="quantity" >
+                <input type="number" class="form-control text-center"  placeholder="0" aria-label="cost"
+                aria-describedby="addon-wrapping" (input)="onQuantityChange($event)"  [(ngModel)]="quantity" (value)="quantity">
+
               </div>
         </div>
     </div>

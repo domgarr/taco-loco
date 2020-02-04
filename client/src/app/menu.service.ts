@@ -13,6 +13,6 @@ export class MenuService {
   private readonly menuEndpoint : string = "/menu"  
 
   getMenu() : Observable<MenuItem[]> {
-    return this.http.get<MenuItem[]>("/api" + this.menuEndpoint);
+    return this.http.get<MenuItem[]>(this.menuEndpoint);
   }
 }
