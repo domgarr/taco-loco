@@ -1,5 +1,8 @@
 package com.domgarr.tacoloco.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * MenuItem is a model for an item thats exists on taco-loco's menu.
  * This model will be wrapped by the OrderItem class where it can be used
@@ -12,7 +15,7 @@ package com.domgarr.tacoloco.model;
 public class MenuItem {
 	int id;
 	private String name;
-	private double cost;
+	private BigDecimal cost; //BigDecimal is used to round doubles to two decimal places.
 	
 	public MenuItem(int id, String name, double cost) {
 		setId(id);
@@ -39,9 +42,9 @@ public class MenuItem {
 			throw new IllegalArgumentException("An empty String is an invalid name.");
 		}
 	}
-
-	public double getCost() {
-		return cost;
+	
+	public BigDecimal getCost() {
+		return this.cost;
 	}
 
 	public void setCost(double cost) {
@@ -49,7 +52,14 @@ public class MenuItem {
 		if(cost <= 0) {
 			throw new IllegalArgumentException("Zero or negative doubles are an invalid argument for cost.");
 		}else {
-			this.cost = cost;
+			this.cost = new BigDecimal(cost).setScale(2, RoundingMode.HALF_UP);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "test";
 	}	
+	
+	
 }

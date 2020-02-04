@@ -3,6 +3,9 @@ package com.domgarr.tacoloco;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +26,7 @@ public class MenuItemTests extends TacoLocoApplicationTests {
 	@DisplayName("The MenuItem constructor should take a name followed by a cost")
 	void menuItemTwoParameterConstructorTest() {
 		assertEquals("Veggie Taco", veggieTaco.getName());
-		assertEquals(2.50, veggieTaco.getCost());
+		assertEquals(new BigDecimal(2.50).setScale(2, RoundingMode.HALF_UP), veggieTaco.getCost());
 	}
 	
 	//Test getId().
@@ -50,9 +53,9 @@ public class MenuItemTests extends TacoLocoApplicationTests {
 	@Test
 	@DisplayName("Setting the cost of a MenuItem should mutate the cost.")
 	void menuItemSetCostWithValidValueTest() {
-		assertEquals(2.50, veggieTaco.getCost());
+		assertEquals(new BigDecimal(2.50).setScale(2, RoundingMode.HALF_UP), veggieTaco.getCost());
 		veggieTaco.setCost(3.00);
-		assertEquals(3.00, veggieTaco.getCost());
+		assertEquals(new BigDecimal(3.00).setScale(2, RoundingMode.HALF_UP), veggieTaco.getCost());
 	}
 	
 	@Test

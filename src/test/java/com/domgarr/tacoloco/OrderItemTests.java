@@ -3,6 +3,10 @@ package com.domgarr.tacoloco;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static com.domgarr.tacoloco.service.MenuService.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -100,7 +104,7 @@ public class OrderItemTests extends TacoLocoApplicationTests {
 	void orderItemWithQuantityOfOneTotalCostTest() {
 		assertEquals(1, veggieTacoOrder.getQuantity());
 		//By default the veggieTacoOrder has a quantity of 1.
-		assertEquals(2.50, veggieTacoOrder.getTotalCost());
+		assertEquals(new BigDecimal(2.50).setScale(2, RoundingMode.HALF_UP), veggieTacoOrder.getTotalCost());
 	}
 	
 	@Test
@@ -108,7 +112,7 @@ public class OrderItemTests extends TacoLocoApplicationTests {
 	void orderItemWithQuantityOfTwoTotalCostTest() {
 		veggieTacoOrder.setQuantity(2);
 		assertEquals(2, veggieTacoOrder.getQuantity());
-		assertEquals(5.00, veggieTacoOrder.getTotalCost());
+		assertEquals(new BigDecimal(5.00).setScale(2, RoundingMode.HALF_UP), veggieTacoOrder.getTotalCost());
 	}
 	
 }

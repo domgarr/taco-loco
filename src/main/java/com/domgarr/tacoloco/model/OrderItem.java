@@ -1,5 +1,8 @@
 package com.domgarr.tacoloco.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * OrderItem will encapsulate a menuItem and the quantity ordered. 
  * The main purpose of this class is to calculate the totalCost of a menuItem with n quantity selected. 
@@ -51,8 +54,8 @@ public class OrderItem {
 		}
 	}
 	
-	public double getTotalCost() {
-		return menuItem.getCost() * quantity;
+	public BigDecimal getTotalCost() {
+		return new BigDecimal(menuItem.getCost().doubleValue() * quantity).setScale(2, RoundingMode.HALF_UP );
 	}
 	
 	

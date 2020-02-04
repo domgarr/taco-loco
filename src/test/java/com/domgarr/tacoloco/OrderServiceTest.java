@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -122,39 +124,6 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		assertEquals(19.20, orderService.getTotalOrderCostFromOrderItems(orderItems));
 	}
 	
-	
-	//Test roundTotalCost()
-	
-	@Test
-	@DisplayName("roundTotalCost(2.2) should return 2.22")
-	void roundDoubleToTwoDecimalPointsOneDecPointTest() {
-		assertEquals(2.20, orderService.roundDoubleToTwoDecimalPoints(2.2));
-	}
-	
-	@Test
-	@DisplayName("roundTotalCost(2.22) should return 2.22")
-	void roundDoubleToTwoDecimalPointsTwoDecPointTest() {
-		assertEquals(2.22, orderService.roundDoubleToTwoDecimalPoints(2.22));
-	}
-	
-	@Test
-	@DisplayName("roundTotalCost(2.25) should return 2.30")
-	void roundDoubleToTwoDecimalPointsTwoDecPointRoundUpTest() {
-		assertEquals(2.20, orderService.roundDoubleToTwoDecimalPoints(2.2));
-	}
-	
-	@Test
-	@DisplayName("roundTotalCost(2.223333456) should return 2.22")
-	void roundDoubleToTwoDecimalPoints9DecPointTest() {
-		assertEquals(2.22, orderService.roundDoubleToTwoDecimalPoints(2.223333456));
-	}
-	
-	@Test
-	@DisplayName("roundTotalCost(22.2) should return 22.20")
-	void roundDoubleToTwoDecimalPoints2Decimal2Integer() {
-		assertEquals(22.20, orderService.roundDoubleToTwoDecimalPoints(22.2));
-	}
-
 	@Test
 	@DisplayName("An OrderItemRequest with id: 1 and quantity of 1 should equate to a veggie taco OrderItem in an ArrayList.")
 	void toOrderItemListTest(){
@@ -169,7 +138,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		OrderItem veggieTaco = orderItemList.get(0);
 		
 		assertEquals(1, veggieTaco.getMenuItem().getId());
-		assertEquals(2.50, veggieTaco.getMenuItem().getCost());
+		assertEquals(new BigDecimal(2.50).setScale(2, RoundingMode.HALF_UP), veggieTaco.getMenuItem().getCost());
 		assertEquals(VEGGIE_TACO, veggieTaco.getMenuItem().getName());
 		assertEquals(1, veggieTaco.getQuantity());
 	}

@@ -1,0 +1,23 @@
+
+[
+	{
+		"id":1,
+		"name":"Veggie Taco",
+		"cost":2.50
+	},
+	{
+		"id":2,
+		"name":"Chicken Taco",
+		"cost":3.00
+	},
+	{
+		"id":3,
+		"name":"Beef Taco",
+		"cost":3.00
+	},
+	{
+		"id":4,
+		"name":"Chorizo Taco",
+		"cost":3.50
+	}
+]

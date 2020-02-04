@@ -1,5 +1,8 @@
 package com.domgarr.tacoloco.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.stereotype.Service;
@@ -22,16 +25,21 @@ public class MenuService {
 	public static final String BEEF_TACO = "Beef Taco";
 	public static final String CHORIZO_TACO = "Chorizo Taco";
 	
+	public static final double VEGGIE_TACO_COST = 2.50;
+	public static final double CHICKEN_TACO_COST = 3.00;
+	public static final double BEEF_TACO_COST = 3.00;
+	public static final double CHORIZO_TACO_COST = 3.50;
+
 	private MenuItem veggieTaco;
 	private MenuItem chickenTaco;
 	private MenuItem beefTaco;
 	private MenuItem chorizoTaco;
 	
 	public MenuService() {
-		veggieTaco = new MenuItem(1, VEGGIE_TACO, 2.50);
-		chickenTaco = new MenuItem(2, CHICKEN_TACO, 3);
-		beefTaco = new MenuItem(3, BEEF_TACO, 3);
-		chorizoTaco = new MenuItem(4, CHORIZO_TACO, 3.50);
+		veggieTaco = new MenuItem(1, VEGGIE_TACO, VEGGIE_TACO_COST);
+		chickenTaco = new MenuItem(2, CHICKEN_TACO, CHICKEN_TACO_COST);
+		beefTaco = new MenuItem(3, BEEF_TACO, BEEF_TACO_COST);
+		chorizoTaco = new MenuItem(4, CHORIZO_TACO, CHORIZO_TACO_COST);
 	}
 	
 	public HashMap<String, MenuItem> getMenuMapWithStringAsKey(){
@@ -52,5 +60,14 @@ public class MenuService {
 		menuMap.put(chorizoTaco.getId(), chorizoTaco);
 		
 		return menuMap;
+	}
+	
+	public ArrayList<MenuItem> getMenuAsList(){
+		ArrayList<MenuItem> menuItemList = new ArrayList<>();		
+		menuItemList.add(veggieTaco);
+		menuItemList.add(chickenTaco);
+		menuItemList.add(beefTaco);
+		menuItemList.add(chorizoTaco);
+		return  menuItemList;
 	}
 }

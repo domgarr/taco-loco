@@ -1,5 +1,8 @@
 package com.domgarr.tacoloco;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -65,25 +68,25 @@ public class MenuServiceTests extends TacoLocoApplicationTests {
 	@Test
 	@DisplayName("VEGGIE_TACO should return 2.50")
 	void menuItemCostTest1() {
-		assertEquals(2.50, menuItems.get(VEGGIE_TACO).getCost());
+		assertEquals(new BigDecimal(2.50).setScale(2, RoundingMode.HALF_UP), menuItems.get(VEGGIE_TACO).getCost());
 	}
 	
 	@Test
 	@DisplayName("BEEF_TACO should return 3.00")
 	void menuItemCostTest2() {
-		assertEquals(3.00, menuItems.get(BEEF_TACO).getCost());
+		assertEquals(new BigDecimal(3.00).setScale(2, RoundingMode.HALF_UP), menuItems.get(BEEF_TACO).getCost());
 	}
 	
 	@Test
 	@DisplayName("CHICKEN_TACO should return 3.00")
 	void menuItemCostTest3() {
-		assertEquals(3.00, menuItems.get(CHICKEN_TACO).getCost());
+		assertEquals(new BigDecimal(3.00).setScale(2, RoundingMode.HALF_UP), menuItems.get(CHICKEN_TACO).getCost());
 	}
 	
 	@Test
 	@DisplayName("CHORIZO_TACO should return 3.50")
 	void menuItemCostTest4() {
-		assertEquals(3.50, menuItems.get(CHORIZO_TACO).getCost());
+		assertEquals(new BigDecimal(3.50).setScale(2, RoundingMode.HALF_UP), menuItems.get(CHORIZO_TACO).getCost());
 	}
 	
 	//Test the MenuMap with integer keys. I believe testing for an empty map and map size is correct size of four is sufficient.
@@ -91,6 +94,13 @@ public class MenuServiceTests extends TacoLocoApplicationTests {
 	@DisplayName("getMenuMapWithIntegerAsKey() should return a map with four keys.")
 	void hashMapIntegerKeyTest() {
 		HashMap<Integer, MenuItem> menuItems = menuService.getMenuMapWithIntegerAsKey();
+		assertEquals(4, menuItems.size());
+	}
+	
+	@Test
+	@DisplayName("GetMenu() returns the menu as an ArrayList<> with four items.")
+	void getMenuSizeTest() {
+		ArrayList<MenuItem> menuItems = menuService.getMenuAsList();
 		assertEquals(4, menuItems.size());
 	}
 	

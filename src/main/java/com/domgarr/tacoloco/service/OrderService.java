@@ -1,5 +1,7 @@
 package com.domgarr.tacoloco.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +47,7 @@ public class OrderService {
 		int totalQuantity = 0;
 		
 		for(OrderItem orderItem : orderItemList) {
-			totalCost += orderItem.getTotalCost();
+			totalCost += orderItem.getTotalCost().doubleValue();
 			totalQuantity += orderItem.getQuantity();
 		}
 		
@@ -53,24 +55,10 @@ public class OrderService {
 		if(totalQuantity >= discountThreshold) {
 			totalCost *= 1 - discountPrecentage;
 		}
-
-		return roundDoubleToTwoDecimalPoints(totalCost);
+		//Round totalCost to two decimal places.
+		return new BigDecimal(totalCost).setScale(2, RoundingMode.HALF_UP).doubleValue();
 	}
 
-	/**
-	 * If a double has less than 2 decimal points append 0's to create to decimal points.
-	 * 
-	 * The purpose of this method is to have cost output consistency of two decimal places. 
-	 * 
-	 * @param totalCost: double
-	 * @return A double rounded to two decimal points.
-	 */
-	public double roundDoubleToTwoDecimalPoints(double totalCost) {
-		//By using this format a double of value 2.2 will be return as in 2.20 and 2.222222 will be rounded to two decimal places : 2.22
-		DecimalFormat df = new DecimalFormat("#.00");
-		return Double.valueOf(df.format(totalCost));
-	}
-	
 	/**
 	 * OrderController takes a list of OrderItemRequest objects (containing id and quantity - the minimum amount of info needed to calculate cost)
 	 * which we have to then populate into OrderItem objects to use as an input for getTotalOrderCost().
