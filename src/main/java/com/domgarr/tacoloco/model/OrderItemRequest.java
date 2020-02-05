@@ -1,6 +1,5 @@
 package com.domgarr.tacoloco.model;
 
-
 /**
  * OrderItemRequest is used to map a JSON object containing an id and quantity.
  * OrderService will use OrderItemRequest's state to populate OrderItem objects.
