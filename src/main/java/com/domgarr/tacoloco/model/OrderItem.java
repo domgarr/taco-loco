@@ -7,6 +7,7 @@ import java.math.RoundingMode;
  * OrderItem will encapsulate a menuItem and the quantity ordered. 
  * The main purpose of this class is to calculate the totalCost of a menuItem with n quantity selected. 
  * 
+ * 
  * @author Domenic
  *
  */
@@ -49,6 +50,8 @@ public class OrderItem {
 		
 		if(quantity <= 0) {
 			throw new IllegalArgumentException("The quantity of an order can't be less than or equal 0.");
+		}else if(quantity > 100) {
+			throw new IllegalArgumentException("The quantity of an order can't exceed 100.");
 		}else {
 			this.quantity = quantity;
 		}
