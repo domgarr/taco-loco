@@ -2,17 +2,20 @@
 
 
 # quick-start 
-- import as an "Existing Maven Project"
+To run the server and client.
+
 - mvn spring-boot:run
 
 or
 
 - mvn package
-- cd target
+- cd taco-loco/target
 - java -jar *.jar
 
+Navigate to localhost:8080/ to utilize a UI that allows for use of the following APIs shown below. 
 
-# api
+
+# APIs
 
 ## /menu
   Is a GET request returning Tacoloco's menu.
@@ -42,9 +45,9 @@ or
 ```
 
 ## /order
-  Is a POST request requring an array of objects, each object has an id to a menu item and the quantity ordered.
+  Is a POST request requiring an array of objects, each object requires an id (associated to a menu item) and quantity (of that menu item ordered).
   - 'id' can range from 1-4. Note: Any Ids out of range will throw an error.
-  - 'quantity' can be any positive integer. Note: Any negative integers will throw an error. Max quantity of an item is 100.
+  - 'quantity' can be any positive integer below or equal to 100. Note: Any negative integers or integers greater than 100 will throw an error.
 
 ```
 {
