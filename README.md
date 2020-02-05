@@ -43,8 +43,8 @@ or
 
 ## /order
   Is a POST request requring an array of objects, each object has an id to a menu item and the quantity ordered.
-  -'id' can range from 1-4. Note: Any Ids out of range will throw an error.
-  -'quantity' can be any positive integer. Note: Any negative integers will throw an error.
+  - 'id' can range from 1-4. Note: Any Ids out of range will throw an error.
+  - 'quantity' can be any positive integer. Note: Any negative integers will throw an error. Max quantity of an item is 100.
 
 ```
 {
