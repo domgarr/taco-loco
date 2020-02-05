@@ -9,9 +9,16 @@ import { ObjectUnsubscribedError } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
 
-  totalCost : number;
+/**
+ * DashBoardComponent, not named very well, contains the MenuItems of TacoLoco,
+ * each MenuItem is a MenuItemComponent which has an input box which contains a quantity wishing to order.
+ * 
+ * Every time a quantity is changed, MenuItemComponent emits an event to this component where onOrderChange handles
+ * updating the order by sending the information to the API and updating totalCost.
+ */
+export class DashboardComponent implements OnInit {
+  totalCost : number; //Updates totalCost in UI.
   menuItems : MenuItem[]; //Populated my MenuService
   order : any[] //Holds order to be send to OrderService (/order)
 
@@ -19,7 +26,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private menuService: MenuService, private orderService : OrderService) {
     this.totalCost = 0.00;
-    this.order = [];
+    this.order = []; //Contains MenuItems ordered where quantites is greater than 0.
     
     //Get the Tacoloco's menu items.
     this.menuService.getMenu().subscribe(
@@ -34,7 +41,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  //Event emitted by MenuComponent.
+  //Event emitted by MenuComponent. Any time a item ordered quantity changes this function is called.
   onOrderChange(newOrder){
     let existingOrder = this.order.find( order => order.id == newOrder.id);
     if(existingOrder){
@@ -42,7 +49,6 @@ export class DashboardComponent implements OnInit {
       let index = this.order.indexOf(existingOrder);
       //Check if customer has set quantity to 0.
       if(newOrder.quantity === 0){
-        console.log(newOrder.quantity);
         //if so remove.
         this.order.splice(index,1);
       }else{

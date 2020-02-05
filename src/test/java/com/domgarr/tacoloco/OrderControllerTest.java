@@ -90,7 +90,7 @@ public class OrderControllerTest extends TacoLocoApplicationTests {
 	}
 	
 	@Test
-	@DisplayName("A JSON with an quantity ordered of 101 should throw a 400 BAD_REQUEST and error message should state : 'The quantity of an order can't exceed 100.'")
+	@DisplayName("A JSON with an quantity ordered of 101 should throw a 400 BAD_REQUEST and error message should state : 'The quantity of a single item order can't exceed 100.'")
 	void orderControllerPostOrderTest11() throws Exception {
 		
 	    String jsonContent = new String(Files.readAllBytes(Paths.get(pathToJsonRequests + "/test_11.json")));
@@ -98,7 +98,7 @@ public class OrderControllerTest extends TacoLocoApplicationTests {
 	    this.mockMvc.perform(post("/order").content(jsonContent).contentType(MediaType.APPLICATION_JSON_VALUE))
 		.andDo(print())
 		.andExpect(status().isBadRequest())
-		.andExpect(status().reason("The quantity of an order can't exceed 100."))
+		.andExpect(status().reason("The quantity of a single item order can't exceed 100."))
 		.andExpect(content().string(containsString("")));
 	}
 	
