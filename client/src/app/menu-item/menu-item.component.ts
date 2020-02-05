@@ -22,7 +22,6 @@ export class MenuItemComponent implements OnInit {
 
   //Trigger any time the user changes an input.
   onQuantityChange(event){
-    console.log(event);
     //Prevent users from entering negative values.
     if(this.quantity == null || this.quantity < 0){
       this.quantity = 0;
@@ -36,7 +35,6 @@ export class MenuItemComponent implements OnInit {
     //Update input value this way, since 2-way binding doesn't want to work or i just don't understand it.
     event.target.value = this.quantity;
 
-    console.log(this.quantity);
     // Create an object with the two mandatory fields needed to calculate totalCost.
     let reqObj = {
       "id":this.menuItem.id,
