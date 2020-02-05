@@ -186,7 +186,7 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 		ArrayList<OrderItemRequest> orderItemReqList = new ArrayList<>();
 		orderItemReqList.add(orderItemReq);
 		
-		Exception exception = assertThrows(IllegalArgumentException.class, ()->{ArrayList<OrderItem> orderItemList = orderService.toOrderItemList(orderItemReqList);});
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.toOrderItemList(orderItemReqList);});
 		assertEquals("The given id of 7 is not a valid id for a menu item.", exception.getMessage());
 	}
 }
