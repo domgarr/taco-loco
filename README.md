@@ -3,14 +3,8 @@
 
 # quick-start 
 To run the server and client.
-
-- mvn spring-boot:run
-
-or
-
-- mvn package
-- cd taco-loco/target
-- java -jar *.jar
+- import existing maven project ( I used Eclipse) 
+- run as maven build... goals: mvn spring-boot:run
 
 Navigate to localhost:8080/ to utilize a UI that allows for use of the following APIs shown below. 
 
@@ -46,11 +40,12 @@ Navigate to localhost:8080/ to utilize a UI that allows for use of the following
 
 ## /order
   Is a POST request requiring an array of objects, each object requires an id (associated to a menu item) and quantity (of that menu item ordered).
-  - 'id' can range from 1-4. Note: Any Ids out of range will throw an error.
-  - 'quantity' can be any positive integer below or equal to 100. Note: Any negative integers or integers greater than 100 will throw an error.
+  - 'id' can range from 1-4. Note: Any Ids out of range or if the request has an menu item object with a duplicate id, an error will be thrown.
+  - 'quantity' can be a positive integer between 1-100. Note: Any negative integers or integers greater than 100 will throw an error.
+  - The api will only take an array of 1-4 items, the max amount of items is equal to the amount items on the menu - which is 4.
 
 ```
-{
+
   [
 	{
 	"id": 1,
@@ -69,7 +64,7 @@ Navigate to localhost:8080/ to utilize a UI that allows for use of the following
 	"quantity" : 1
 	}
   ]
-}
+
 ```
 returns a JSON with a totalCost field. Note: Discount applied on orders containing 4 or more items.
 
