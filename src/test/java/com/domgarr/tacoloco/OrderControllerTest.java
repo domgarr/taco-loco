@@ -168,6 +168,46 @@ public class OrderControllerTest extends TacoLocoApplicationTests {
 		.andExpect(content().string(containsString("")));
 	}
 	
+	@Test
+	@DisplayName("The JSON request should only allow one object per menu item and should throw a " + 
+	"400 BAD_REQUEST and the error message should state : 'The number of objects in the JSON request have exceeded the allowable length.")
+	void orderControllerPostOrderTest12() throws Exception {
+		
+	    String jsonContent = new String(Files.readAllBytes(Paths.get(pathToJsonRequests + "/test_12.json")));
+
+	    this.mockMvc.perform(post("/order").content(jsonContent).contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andDo(print())
+		.andExpect(status().isBadRequest())
+		.andExpect(status().reason("The number of objects in the JSON request have exceeded the allowable length."))
+		.andExpect(content().string(containsString("")));
+	}
+	
+	@Test
+	@DisplayName("The objects in a JSON request should not contain duplicate IDS (that is duplicate menu items) and should throw an error 400 BAD_REQUEST statging : "
+			+ " 'Duplicate menu items in the request found." )
+	void orderControllerPostOrderTest13() throws Exception {
+		
+	    String jsonContent = new String(Files.readAllBytes(Paths.get(pathToJsonRequests + "/test_13.json")));
+
+	    this.mockMvc.perform(post("/order").content(jsonContent).contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andDo(print())
+		.andExpect(status().isBadRequest())
+		.andExpect(status().reason("Duplicate menu items in the request found."))
+		.andExpect(content().string(containsString("")));
+	}
+	
+	@Test
+	@DisplayName("An order with 100 of each taco (The max a person can order) should return 960.00 (Discount applied)" )
+	void orderControllerPostOrderTest14() throws Exception {
+		
+	    String jsonContent = new String(Files.readAllBytes(Paths.get(pathToJsonRequests + "/test_14.json")));
+
+	    this.mockMvc.perform(post("/order").content(jsonContent).contentType(MediaType.APPLICATION_JSON_VALUE))
+		.andDo(print())
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("{\"totalCost\":960.00}")));
+	}
+	
 	
 	
 	

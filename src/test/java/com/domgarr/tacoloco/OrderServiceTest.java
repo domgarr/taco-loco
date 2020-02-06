@@ -49,17 +49,18 @@ public class OrderServiceTest extends TacoLocoApplicationTests {
 	
 	//Test if the ArrayList is null or empty;
 	@Test
-	@DisplayName("A null OrderItemArrayList should throw an IllegalArgumentException")
+	@DisplayName("getTotalCost() given a null OrderItemRequest list should throw an IllegalArgumentException: 'The list of item orders can't be null or empty.'")
 	void getTotalOrderCostNullArrayListTest() {
-		ArrayList<OrderItem> nullOrderList = null;
-		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCostFromOrderItems(nullOrderList);});
+		ArrayList<OrderItemRequest> nullOrderList = null;
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalCost(nullOrderList);});
 		assertEquals("The list of item orders can't be null or empty.", exception.getMessage());
 	}
 	
 	@Test
-	@DisplayName("An empty OrderItemArrayList should throw an IllegalArgumentException")
+	@DisplayName("getTotalCost() given an empty OrderItemRequest list should throw an IllegalArgumentException: 'The list of item orders can't be null or empty.'")
 	void getTotalOrderCostEmptyArrayListTest() {
-		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalOrderCostFromOrderItems(orderItems);});
+		ArrayList<OrderItemRequest> emptyOrderList = new ArrayList<>();
+		Exception exception = assertThrows(IllegalArgumentException.class, ()->{orderService.getTotalCost(emptyOrderList);});
 		assertEquals("The list of item orders can't be null or empty.", exception.getMessage());
 	}
 	
