@@ -1,5 +1,5 @@
-# taco-loco
-
+# Menu Cost Calculator 
+- The following project was built for a contracting company's interview process and required it to be built using TDD.
 
 # quick-start 
 To run the server and client.
